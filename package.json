@@ -1,7 +1,7 @@
 {
   "name": "chair-flight-docsearch-react",
   "description": "A clone of Algolia's React DocSearch, but it accepts any search backend.",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "license": "MIT",
   "repository": "chair-flight/chair-flight-docsearch-react",
   "author": "pupoSDC",
@@ -29,8 +29,6 @@
     "watch": "watch \"yarn on:change\" --ignoreDirectoryPattern \"/dist/\""
   },
   "devDependencies": {
-    "@algolia/autocomplete-core": "^1.6.2",
-    "@algolia/client-search": "^4.13.0",
     "@babel/cli": "^7.17.6",
     "@babel/plugin-transform-react-jsx": "^7.17.3",
     "@babel/preset-env": "^7.16.11",
@@ -53,7 +51,7 @@
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "@algolia/autocomplete-core": "1.5.2",
+    "@algolia/autocomplete-core": "1.6.2",
     "@docsearch/css": "3.0.0"
   },
   "peerDependencies": {
