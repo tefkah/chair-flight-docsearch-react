@@ -1,15 +1,15 @@
 import type {
   AutocompleteApi,
   AutocompleteState,
-} from '@algolia/autocomplete-core';
-import type { MutableRefObject } from 'react';
-import React from 'react';
+} from "@algolia/autocomplete-core";
+import type { MutableRefObject } from "react";
+import React from "react";
 
-import { MAX_QUERY_SIZE } from './constants';
-import { LoadingIcon } from './icons/LoadingIcon';
-import { ResetIcon } from './icons/ResetIcon';
-import { SearchIcon } from './icons/SearchIcon';
-import type { InternalDocSearchHit } from './types';
+import { MAX_QUERY_SIZE } from "./constants";
+import { LoadingIcon } from "./icons/LoadingIcon";
+import { ResetIcon } from "./icons/ResetIcon";
+import { SearchIcon } from "./icons/SearchIcon";
+import type { InternalDocSearchHit } from "./types";
 
 export type SearchBoxTranslations = Partial<{
   resetButtonTitle: string;
@@ -35,10 +35,10 @@ interface SearchBoxProps
 
 export function SearchBox({ translations = {}, ...props }: SearchBoxProps) {
   const {
-    resetButtonTitle = 'Clear the query',
-    resetButtonAriaLabel = 'Clear the query',
-    cancelButtonText = 'Cancel',
-    cancelButtonAriaLabel = 'Cancel',
+    resetButtonTitle = "Clear the query",
+    resetButtonAriaLabel = "Clear the query",
+    cancelButtonText = "Cancel",
+    cancelButtonAriaLabel = "Cancel",
   } = translations;
   const { onReset } = props.getFormProps({
     inputElement: props.inputRef.current,

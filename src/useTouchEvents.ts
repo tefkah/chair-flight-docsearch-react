@@ -1,8 +1,8 @@
-import type { AutocompleteApi } from '@algolia/autocomplete-core';
-import React from 'react';
+import type { AutocompleteApi } from "@algolia/autocomplete-core";
+import React from "react";
 
 interface UseTouchEventsProps {
-  getEnvironmentProps: AutocompleteApi<any>['getEnvironmentProps'];
+  getEnvironmentProps: AutocompleteApi<any>["getEnvironmentProps"];
   panelElement: HTMLDivElement | null;
   formElement: HTMLDivElement | null;
   inputElement: HTMLInputElement | null;
@@ -25,12 +25,12 @@ export function useTouchEvents({
       inputElement,
     });
 
-    window.addEventListener('touchstart', onTouchStart);
-    window.addEventListener('touchmove', onTouchMove);
+    window.addEventListener("touchstart", onTouchStart);
+    window.addEventListener("touchmove", onTouchMove);
 
     return () => {
-      window.removeEventListener('touchstart', onTouchStart);
-      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
     };
   }, [getEnvironmentProps, panelElement, formElement, inputElement]);
 }

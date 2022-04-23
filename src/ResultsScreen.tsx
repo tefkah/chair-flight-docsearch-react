@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import { SelectIcon, SourceIcon } from './icons';
-import { Results } from './Results';
-import type { ScreenStateProps } from './ScreenState';
-import type { InternalDocSearchHit } from './types';
-import { removeHighlightTags } from './utils';
+import { SelectIcon, SourceIcon } from "./icons";
+import { Results } from "./Results";
+import type { ScreenStateProps } from "./ScreenState";
+import type { InternalDocSearchHit } from "./types";
+import { removeHighlightTags } from "./utils";
 
 type ResultsScreenProps = Omit<
   ScreenStateProps<InternalDocSearchHit>,
-  'translations'
+  "translations"
 >;
 
 export function ResultsScreen(props: ResultsScreenProps) {

@@ -2,19 +2,19 @@ import type {
   AutocompleteApi,
   AutocompleteState,
   BaseItem,
-} from '@algolia/autocomplete-core';
-import React from 'react';
+} from "@algolia/autocomplete-core";
+import React from "react";
 
-import type { DocSearchProps } from './DocSearch';
-import type { ErrorScreenTranslations } from './ErrorScreen';
-import { ErrorScreen } from './ErrorScreen';
-import type { NoResultsScreenTranslations } from './NoResultsScreen';
-import { NoResultsScreen } from './NoResultsScreen';
-import { ResultsScreen } from './ResultsScreen';
-import type { StartScreenTranslations } from './StartScreen';
-import { StartScreen } from './StartScreen';
-import type { StoredSearchPlugin } from './stored-searches';
-import type { InternalDocSearchHit, StoredDocSearchHit } from './types';
+import type { DocSearchProps } from "./DocSearch";
+import type { ErrorScreenTranslations } from "./ErrorScreen";
+import { ErrorScreen } from "./ErrorScreen";
+import type { NoResultsScreenTranslations } from "./NoResultsScreen";
+import { NoResultsScreen } from "./NoResultsScreen";
+import { ResultsScreen } from "./ResultsScreen";
+import type { StartScreenTranslations } from "./StartScreen";
+import { StartScreen } from "./StartScreen";
+import type { StoredSearchPlugin } from "./stored-searches";
+import type { InternalDocSearchHit, StoredDocSearchHit } from "./types";
 
 export type ScreenStateTranslations = Partial<{
   errorScreen: ErrorScreenTranslations;
@@ -34,17 +34,17 @@ export interface ScreenStateProps<TItem extends BaseItem>
   favoriteSearches: StoredSearchPlugin<StoredDocSearchHit>;
   onItemClick: (item: InternalDocSearchHit) => void;
   inputRef: React.MutableRefObject<HTMLInputElement | null>;
-  hitComponent: DocSearchProps['hitComponent'];
-  indexName: DocSearchProps['indexName'];
+  hitComponent: DocSearchProps["hitComponent"];
+  indexName: DocSearchProps["indexName"];
   disableUserPersonalization: boolean;
-  resultsFooterComponent: DocSearchProps['resultsFooterComponent'];
+  resultsFooterComponent: DocSearchProps["resultsFooterComponent"];
   translations: ScreenStateTranslations;
-  getMissingResultsUrl?: DocSearchProps['getMissingResultsUrl'];
+  getMissingResultsUrl?: DocSearchProps["getMissingResultsUrl"];
 }
 
 export const ScreenState = React.memo(
   ({ translations = {}, ...props }: ScreenStateProps<InternalDocSearchHit>) => {
-    if (props.state.status === 'error') {
+    if (props.state.status === "error") {
       return <ErrorScreen translations={translations?.errorScreen} />;
     }
 
@@ -79,8 +79,8 @@ export const ScreenState = React.memo(
     //  - Empty screen → Results screen
     //  - NoResults screen → NoResults screen with another query
     return (
-      nextProps.state.status === 'loading' ||
-      nextProps.state.status === 'stalled'
+      nextProps.state.status === "loading" ||
+      nextProps.state.status === "stalled"
     );
   }
 );

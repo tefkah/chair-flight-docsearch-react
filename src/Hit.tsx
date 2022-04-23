@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import type { InternalDocSearchHit, StoredDocSearchHit } from './types';
+import type { InternalDocSearchHit, StoredDocSearchHit } from "./types";
 
 interface HitProps {
   hit: InternalDocSearchHit | StoredDocSearchHit;

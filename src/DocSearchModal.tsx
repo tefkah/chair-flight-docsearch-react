@@ -1,25 +1,25 @@
-import type { AutocompleteState } from '@algolia/autocomplete-core';
-import { createAutocomplete } from '@algolia/autocomplete-core';
-import React from 'react';
+import type { AutocompleteState } from "@algolia/autocomplete-core";
+import { createAutocomplete } from "@algolia/autocomplete-core";
+import React from "react";
 
-import { MAX_QUERY_SIZE } from './constants';
-import type { DocSearchProps } from './DocSearch';
-import type { FooterTranslations } from './Footer';
-import { Footer } from './Footer';
-import { Hit } from './Hit';
-import type { ScreenStateTranslations } from './ScreenState';
-import { ScreenState } from './ScreenState';
-import type { SearchBoxTranslations } from './SearchBox';
-import { SearchBox } from './SearchBox';
-import { createStoredSearches } from './stored-searches';
+import { MAX_QUERY_SIZE } from "./constants";
+import type { DocSearchProps } from "./DocSearch";
+import type { FooterTranslations } from "./Footer";
+import { Footer } from "./Footer";
+import { Hit } from "./Hit";
+import type { ScreenStateTranslations } from "./ScreenState";
+import { ScreenState } from "./ScreenState";
+import type { SearchBoxTranslations } from "./SearchBox";
+import { SearchBox } from "./SearchBox";
+import { createStoredSearches } from "./stored-searches";
 import type {
   DocSearchHit,
   InternalDocSearchHit,
   StoredDocSearchHit,
-} from './types';
-import { useTouchEvents } from './useTouchEvents';
-import { useTrapFocus } from './useTrapFocus';
-import { groupBy, identity, noop, removeHighlightTags } from './utils';
+} from "./types";
+import { useTouchEvents } from "./useTouchEvents";
+import { useTrapFocus } from "./useTrapFocus";
+import { groupBy, identity, noop, removeHighlightTags } from "./utils";
 
 export type ModalTranslations = Partial<{
   searchBox: SearchBoxTranslations;
@@ -35,7 +35,7 @@ export type DocSearchModalProps = DocSearchProps & {
 
 export function DocSearchModal({
   indexName,
-  placeholder = 'Search docs',
+  placeholder = "Search docs",
   onClose = noop,
   transformItems = identity,
   hitComponent = Hit,
@@ -43,10 +43,10 @@ export function DocSearchModal({
   navigator,
   initialScrollY = 0,
   disableUserPersonalization = false,
-  initialQuery: initialQueryFromProp = '',
+  initialQuery: initialQueryFromProp = "",
   translations = {},
   getMissingResultsUrl,
-  search
+  search,
 }: DocSearchModalProps) {
   const {
     footer: footerTranslations,
@@ -56,13 +56,13 @@ export function DocSearchModal({
   const [state, setState] = React.useState<
     AutocompleteState<InternalDocSearchHit>
   >({
-    query: '',
+    query: "",
     collections: [],
     completion: null,
     context: {},
     isOpen: false,
     activeItemId: null,
-    status: 'idle',
+    status: "idle",
   });
 
   const containerRef = React.useRef<HTMLDivElement | null>(null);
@@ -72,9 +72,9 @@ export function DocSearchModal({
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const snippetLength = React.useRef<number>(10);
   const initialQueryFromSelection = React.useRef(
-    typeof window !== 'undefined'
+    typeof window !== "undefined"
       ? window.getSelection()!.toString().slice(0, MAX_QUERY_SIZE)
-      : ''
+      : ""
   ).current;
   const initialQuery = React.useRef(
     initialQueryFromProp || initialQueryFromSelection
@@ -102,7 +102,7 @@ export function DocSearchModal({
       }
 
       // We don't store `content` record, but their parent if available.
-      const search = item.type === 'content' ? item.__docsearch_parent : item;
+      const search = item.type === "content" ? item.__docsearch_parent : item;
 
       // We save the recent search only if it's not favorited.
       if (
@@ -125,7 +125,7 @@ export function DocSearchModal({
         React.MouseEvent,
         React.KeyboardEvent
       >({
-        id: 'docsearch',
+        id: "docsearch",
         defaultActiveItemId: 0,
         placeholder,
         openOnFocus: true,
@@ -147,7 +147,7 @@ export function DocSearchModal({
 
             return [
               {
-                sourceId: 'recentSearches',
+                sourceId: "recentSearches",
                 onSelect({ item, event }) {
                   saveRecentSearch(item);
 
@@ -163,7 +163,7 @@ export function DocSearchModal({
                 },
               },
               {
-                sourceId: 'favoriteSearches',
+                sourceId: "favoriteSearches",
                 onSelect({ item, event }) {
                   saveRecentSearch(item);
 
@@ -194,45 +194,42 @@ export function DocSearchModal({
             });
           }
 
-          return Object.values<DocSearchHit[]>(sources).map(
-            (items, index) => {
-              return {
-                sourceId: `hits${index}`,
-                onSelect({ item, event }) {
-                  saveRecentSearch(item);
+          return Object.values<DocSearchHit[]>(sources).map((items, index) => {
+            return {
+              sourceId: `hits${index}`,
+              onSelect({ item, event }) {
+                saveRecentSearch(item);
 
-                  if (!event.shiftKey && !event.ctrlKey && !event.metaKey) {
-                    onClose();
-                  }
-                },
-                getItemUrl({ item }) {
-                  return item.url;
-                },
-                getItems() {
-                  return Object.values(
-                    groupBy(items, (item) => item.hierarchy.lvl1)
+                if (!event.shiftKey && !event.ctrlKey && !event.metaKey) {
+                  onClose();
+                }
+              },
+              getItemUrl({ item }) {
+                return item.url;
+              },
+              getItems() {
+                return Object.values(
+                  groupBy(items, (item) => item.hierarchy.lvl1)
+                )
+                  .map(transformItems)
+                  .map((groupedHits) =>
+                    groupedHits.map((item) => {
+                      return {
+                        ...item,
+                        __docsearch_parent:
+                          item.type !== "lvl1" &&
+                          groupedHits.find(
+                            (siblingItem) =>
+                              siblingItem.type === "lvl1" &&
+                              siblingItem.hierarchy.lvl1 === item.hierarchy.lvl1
+                          ),
+                      };
+                    })
                   )
-                    .map(transformItems)
-                    .map((groupedHits) =>
-                      groupedHits.map((item) => {
-                        return {
-                          ...item,
-                          __docsearch_parent:
-                            item.type !== 'lvl1' &&
-                            groupedHits.find(
-                              (siblingItem) =>
-                                siblingItem.type === 'lvl1' &&
-                                siblingItem.hierarchy.lvl1 ===
-                                  item.hierarchy.lvl1
-                            ),
-                        };
-                      })
-                    )
-                    .flat();
-                },
-              };
-            }
-          );
+                  .flat();
+              },
+            };
+          });
         },
       }),
     [
@@ -260,10 +257,10 @@ export function DocSearchModal({
   useTrapFocus({ container: containerRef.current });
 
   React.useEffect(() => {
-    document.body.classList.add('DocSearch--active');
+    document.body.classList.add("DocSearch--active");
 
     return () => {
-      document.body.classList.remove('DocSearch--active');
+      document.body.classList.remove("DocSearch--active");
 
       // IE11 doesn't support `scrollTo` so we check that the method exists
       // first.
@@ -274,7 +271,7 @@ export function DocSearchModal({
   }, []);
 
   React.useEffect(() => {
-    const isMobileMediaQuery = window.matchMedia('(max-width: 750px)');
+    const isMobileMediaQuery = window.matchMedia("(max-width: 750px)");
 
     if (isMobileMediaQuery.matches) {
       snippetLength.current = 5;
@@ -309,16 +306,16 @@ export function DocSearchModal({
     function setFullViewportHeight() {
       if (modalRef.current) {
         const vh = window.innerHeight * 0.01;
-        modalRef.current.style.setProperty('--docsearch-vh', `${vh}px`);
+        modalRef.current.style.setProperty("--docsearch-vh", `${vh}px`);
       }
     }
 
     setFullViewportHeight();
 
-    window.addEventListener('resize', setFullViewportHeight);
+    window.addEventListener("resize", setFullViewportHeight);
 
     return () => {
-      window.removeEventListener('resize', setFullViewportHeight);
+      window.removeEventListener("resize", setFullViewportHeight);
     };
   }, []);
 
@@ -326,16 +323,16 @@ export function DocSearchModal({
     <div
       ref={containerRef}
       {...getRootProps({
-        'aria-expanded': true,
+        "aria-expanded": true,
       })}
       className={[
-        'DocSearch',
-        'DocSearch-Container',
-        state.status === 'stalled' && 'DocSearch-Container--Stalled',
-        state.status === 'error' && 'DocSearch-Container--Errored',
+        "DocSearch",
+        "DocSearch-Container",
+        state.status === "stalled" && "DocSearch-Container--Stalled",
+        state.status === "error" && "DocSearch-Container--Errored",
       ]
         .filter(Boolean)
-        .join(' ')}
+        .join(" ")}
       role="button"
       tabIndex={0}
       onMouseDown={(event) => {

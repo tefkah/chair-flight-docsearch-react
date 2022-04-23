@@ -1,20 +1,20 @@
 import type {
   AutocompleteState,
   AutocompleteOptions,
-} from '@algolia/autocomplete-core';
-import React from 'react';
-import { createPortal } from 'react-dom';
+} from "@algolia/autocomplete-core";
+import React from "react";
+import { createPortal } from "react-dom";
 
-import { DocSearchButton } from './DocSearchButton';
-import { DocSearchModal } from './DocSearchModal';
+import { DocSearchButton } from "./DocSearchButton";
+import { DocSearchModal } from "./DocSearchModal";
 import type {
   DocSearchHit,
   InternalDocSearchHit,
   StoredDocSearchHit,
-} from './types';
-import { useDocSearchKeyboardEvents } from './useDocSearchKeyboardEvents';
+} from "./types";
+import { useDocSearchKeyboardEvents } from "./useDocSearchKeyboardEvents";
 
-import type { ButtonTranslations, ModalTranslations } from '.';
+import type { ButtonTranslations, ModalTranslations } from ".";
 
 export type DocSearchTranslations = Partial<{
   button: ButtonTranslations;
@@ -23,7 +23,7 @@ export type DocSearchTranslations = Partial<{
 
 export interface DocSearchProps {
   /**  Provide this instead of the algolia api information */
-  search: (input: string) => Promise<DocSearchHit[]>, 
+  search: (input: string) => Promise<DocSearchHit[]>;
   indexName: string;
   placeholder?: string;
   transformItems?: (items: DocSearchHit[]) => DocSearchHit[];
@@ -36,7 +36,7 @@ export interface DocSearchProps {
   }) => JSX.Element | null;
   disableUserPersonalization?: boolean;
   initialQuery?: string;
-  navigator?: AutocompleteOptions<InternalDocSearchHit>['navigator'];
+  navigator?: AutocompleteOptions<InternalDocSearchHit>["navigator"];
   translations?: DocSearchTranslations;
   getMissingResultsUrl?: ({ query: string }) => string;
 }

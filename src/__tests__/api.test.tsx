@@ -4,13 +4,13 @@ import {
   waitFor,
   screen,
   act,
-} from '@testing-library/react';
-import React from 'react';
+} from "@testing-library/react";
+import React from "react";
 
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 
-import { DocSearch as DocSearchComponent } from '../DocSearch';
-import type { DocSearchProps } from '../DocSearch';
+import { DocSearch as DocSearchComponent } from "../DocSearch";
+import type { DocSearchProps } from "../DocSearch";
 
 function DocSearch(props: Partial<DocSearchProps>) {
   return (
@@ -31,53 +31,53 @@ function noResultSearch(_queries: any, _requestOptions?: any): Promise<any> {
           page: 0,
           processingTimeMS: 0,
           exhaustiveNbHits: true,
-          params: '',
-          query: '',
+          params: "",
+          query: "",
         },
       ],
     });
   });
 }
 
-describe('api', () => {
+describe("api", () => {
   beforeEach(() => {
-    document.body.innerHTML = '';
+    document.body.innerHTML = "";
   });
 
-  it('renders with minimal parameters', () => {
+  it("renders with minimal parameters", () => {
     render(<DocSearch />);
 
-    expect(document.querySelector('.DocSearch')).toBeInTheDocument();
+    expect(document.querySelector(".DocSearch")).toBeInTheDocument();
   });
 
-  describe('translations', () => {
-    it('overrides the default DocSearchButton text', () => {
+  describe("translations", () => {
+    it("overrides the default DocSearchButton text", () => {
       render(
         <DocSearch
           translations={{
             button: {
-              buttonText: 'Recherche',
-              buttonAriaLabel: 'Recherche',
+              buttonText: "Recherche",
+              buttonAriaLabel: "Recherche",
             },
           }}
         />
       );
 
       expect(
-        document.querySelector('.DocSearch-Button-Placeholder').innerHTML
-      ).toBe('Recherche');
+        document.querySelector(".DocSearch-Button-Placeholder").innerHTML
+      ).toBe("Recherche");
       expect(
-        document.querySelector('.DocSearch-Button').getAttribute('aria-label')
-      ).toBe('Recherche');
+        document.querySelector(".DocSearch-Button").getAttribute("aria-label")
+      ).toBe("Recherche");
     });
 
-    it('overrides the default DocSearchModal startScreen text', async () => {
+    it("overrides the default DocSearchModal startScreen text", async () => {
       render(
         <DocSearch
           translations={{
             modal: {
               startScreen: {
-                noRecentSearchesText: 'Pas de recherche récentes',
+                noRecentSearchesText: "Pas de recherche récentes",
               },
             },
           }}
@@ -85,13 +85,13 @@ describe('api', () => {
       );
 
       await waitFor(() => {
-        fireEvent.click(document.querySelector('.DocSearch-Button'));
+        fireEvent.click(document.querySelector(".DocSearch-Button"));
       });
 
-      expect(screen.getByText('Pas de recherche récentes')).toBeInTheDocument();
+      expect(screen.getByText("Pas de recherche récentes")).toBeInTheDocument();
     });
 
-    it('overrides the default DocSearchModal noResultsScreen text', async () => {
+    it("overrides the default DocSearchModal noResultsScreen text", async () => {
       render(
         <DocSearch
           transformSearchClient={(searchClient) => {
@@ -103,24 +103,24 @@ describe('api', () => {
           translations={{
             modal: {
               noResultsScreen: {
-                noResultsText: 'Pas de résultats pour',
+                noResultsText: "Pas de résultats pour",
                 reportMissingResultsText:
-                  'Ouvrez une issue sur docsearch-configs',
-                reportMissingResultsLinkText: 'Lien du repo',
+                  "Ouvrez une issue sur docsearch-configs",
+                reportMissingResultsLinkText: "Lien du repo",
               },
             },
           }}
-          getMissingResultsUrl={() => 'algolia.com'}
+          getMissingResultsUrl={() => "algolia.com"}
         />
       );
 
       await act(async () => {
         await waitFor(() => {
-          fireEvent.click(document.querySelector('.DocSearch-Button'));
+          fireEvent.click(document.querySelector(".DocSearch-Button"));
         });
 
-        fireEvent.input(document.querySelector('.DocSearch-Input'), {
-          target: { value: 'q' },
+        fireEvent.input(document.querySelector(".DocSearch-Input"), {
+          target: { value: "q" },
         });
       });
 
@@ -129,22 +129,22 @@ describe('api', () => {
         screen.getByText(/Ouvrez une issue sur docsearch-configs/)
       ).toBeInTheDocument();
       expect(
-        screen.getByRole('link', {
-          name: 'Lien du repo',
+        screen.getByRole("link", {
+          name: "Lien du repo",
         })
       ).toBeInTheDocument();
     });
 
-    it('overrides the default DocSearchModal searchbox text', async () => {
+    it("overrides the default DocSearchModal searchbox text", async () => {
       render(
         <DocSearch
           translations={{
             modal: {
               searchBox: {
-                resetButtonTitle: 'Effacer',
-                resetButtonAriaLabel: 'Effacer',
-                cancelButtonText: 'Annuler',
-                cancelButtonAriaLabel: 'Annuler',
+                resetButtonTitle: "Effacer",
+                resetButtonAriaLabel: "Effacer",
+                cancelButtonText: "Annuler",
+                cancelButtonAriaLabel: "Annuler",
               },
             },
           }}
@@ -152,37 +152,37 @@ describe('api', () => {
       );
 
       await waitFor(() => {
-        fireEvent.click(document.querySelector('.DocSearch-Button'));
+        fireEvent.click(document.querySelector(".DocSearch-Button"));
       });
 
-      expect(document.querySelector('.DocSearch-Cancel').innerHTML).toBe(
-        'Annuler'
+      expect(document.querySelector(".DocSearch-Cancel").innerHTML).toBe(
+        "Annuler"
       );
       expect(
-        document.querySelector('.DocSearch-Cancel').getAttribute('aria-label')
-      ).toBe('Annuler');
+        document.querySelector(".DocSearch-Cancel").getAttribute("aria-label")
+      ).toBe("Annuler");
 
       expect(
-        document.querySelector('.DocSearch-Reset').getAttribute('title')
-      ).toBe('Effacer');
+        document.querySelector(".DocSearch-Reset").getAttribute("title")
+      ).toBe("Effacer");
       expect(
-        document.querySelector('.DocSearch-Reset').getAttribute('aria-label')
-      ).toBe('Effacer');
+        document.querySelector(".DocSearch-Reset").getAttribute("aria-label")
+      ).toBe("Effacer");
     });
 
-    it('overrides the default DocSearchModal footer text', async () => {
+    it("overrides the default DocSearchModal footer text", async () => {
       render(
         <DocSearch
           translations={{
             modal: {
               footer: {
-                closeText: 'Pour fermer',
+                closeText: "Pour fermer",
                 closeKeyAriaLabel: "Touche d'échappement",
-                navigateText: 'Pour naviguer',
-                navigateUpKeyAriaLabel: 'Flèche vers le haut',
-                navigateDownKeyAriaLabel: 'Flèche le bas',
-                searchByText: 'Recherche par',
-                selectText: 'Pour selectionner',
+                navigateText: "Pour naviguer",
+                navigateUpKeyAriaLabel: "Flèche vers le haut",
+                navigateDownKeyAriaLabel: "Flèche le bas",
+                searchByText: "Recherche par",
+                selectText: "Pour selectionner",
                 selectKeyAriaLabel: "Touche d'entrée",
               },
             },
@@ -191,13 +191,13 @@ describe('api', () => {
       );
 
       await waitFor(() => {
-        fireEvent.click(document.querySelector('.DocSearch-Button'));
+        fireEvent.click(document.querySelector(".DocSearch-Button"));
       });
 
-      expect(screen.getByText('Recherche par')).toBeInTheDocument();
-      expect(screen.getByText('Pour fermer')).toBeInTheDocument();
-      expect(screen.getByText('Pour naviguer')).toBeInTheDocument();
-      expect(screen.getByText('Pour selectionner')).toBeInTheDocument();
+      expect(screen.getByText("Recherche par")).toBeInTheDocument();
+      expect(screen.getByText("Pour fermer")).toBeInTheDocument();
+      expect(screen.getByText("Pour naviguer")).toBeInTheDocument();
+      expect(screen.getByText("Pour selectionner")).toBeInTheDocument();
       expect(
         document.querySelector(
           '.DocSearch-Commands-Key > svg[aria-label="Touche d\'échappement"]'
@@ -221,8 +221,8 @@ describe('api', () => {
     });
   });
 
-  describe('getMissingResultsUrl', () => {
-    it('does not render the link to the repository by default', async () => {
+  describe("getMissingResultsUrl", () => {
+    it("does not render the link to the repository by default", async () => {
       render(
         <DocSearch
           transformSearchClient={(searchClient) => {
@@ -236,21 +236,21 @@ describe('api', () => {
 
       await act(async () => {
         await waitFor(() => {
-          fireEvent.click(document.querySelector('.DocSearch-Button'));
+          fireEvent.click(document.querySelector(".DocSearch-Button"));
         });
 
-        fireEvent.input(document.querySelector('.DocSearch-Input'), {
-          target: { value: 'q' },
+        fireEvent.input(document.querySelector(".DocSearch-Input"), {
+          target: { value: "q" },
         });
       });
 
       expect(screen.getByText(/No results for/)).toBeInTheDocument();
       expect(
-        document.querySelector('.DocSearch-Help a')
+        document.querySelector(".DocSearch-Help a")
       ).not.toBeInTheDocument();
     });
 
-    it('render the link to the repository', async () => {
+    it("render the link to the repository", async () => {
       render(
         <DocSearch
           transformSearchClient={(searchClient) => {
@@ -267,20 +267,20 @@ describe('api', () => {
 
       await act(async () => {
         await waitFor(() => {
-          fireEvent.click(document.querySelector('.DocSearch-Button'));
+          fireEvent.click(document.querySelector(".DocSearch-Button"));
         });
 
-        fireEvent.input(document.querySelector('.DocSearch-Input'), {
-          target: { value: 'q' },
+        fireEvent.input(document.querySelector(".DocSearch-Input"), {
+          target: { value: "q" },
         });
       });
 
       expect(screen.getByText(/No results for/)).toBeInTheDocument();
 
-      const link = document.querySelector('.DocSearch-Help a');
+      const link = document.querySelector(".DocSearch-Help a");
       expect(link).toBeInTheDocument();
-      expect(link.getAttribute('href')).toBe(
-        'https://github.com/algolia/docsearch/issues/new?title=q'
+      expect(link.getAttribute("href")).toBe(
+        "https://github.com/algolia/docsearch/issues/new?title=q"
       );
     });
   });

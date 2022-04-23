@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { NoResultsIcon } from './icons';
-import type { ScreenStateProps } from './ScreenState';
-import type { InternalDocSearchHit } from './types';
+import { NoResultsIcon } from "./icons";
+import type { ScreenStateProps } from "./ScreenState";
+import type { InternalDocSearchHit } from "./types";
 
 export type NoResultsScreenTranslations = Partial<{
   noResultsText: string;
@@ -13,7 +13,7 @@ export type NoResultsScreenTranslations = Partial<{
 
 type NoResultsScreenProps = Omit<
   ScreenStateProps<InternalDocSearchHit>,
-  'translations'
+  "translations"
 > & {
   translations?: NoResultsScreenTranslations;
 };
@@ -23,10 +23,10 @@ export function NoResultsScreen({
   ...props
 }: NoResultsScreenProps) {
   const {
-    noResultsText = 'No results for',
-    suggestedQueryText = 'Try searching for',
-    reportMissingResultsText = 'Believe this query should return results?',
-    reportMissingResultsLinkText = 'Let us know.',
+    noResultsText = "No results for",
+    suggestedQueryText = "Try searching for",
+    reportMissingResultsText = "Believe this query should return results?",
+    reportMissingResultsLinkText = "Let us know.",
   } = translations;
   const searchSuggestions: string[] | undefined = props.state.context
     .searchSuggestions as string[];
@@ -53,7 +53,7 @@ export function NoResultsScreen({
                     key={search}
                     type="button"
                     onClick={() => {
-                      props.setQuery(search.toLowerCase() + ' ');
+                      props.setQuery(search.toLowerCase() + " ");
                       props.refresh();
                       props.inputRef.current!.focus();
                     }}

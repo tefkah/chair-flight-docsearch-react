@@ -1,19 +1,19 @@
-import React, { useMemo } from 'react';
+import React, { useMemo } from "react";
 
-import { ControlKeyIcon } from './icons/ControlKeyIcon';
-import { SearchIcon } from './icons/SearchIcon';
+import { ControlKeyIcon } from "./icons/ControlKeyIcon";
+import { SearchIcon } from "./icons/SearchIcon";
 
 export type ButtonTranslations = Partial<{
   buttonText: string;
   buttonAriaLabel: string;
 }>;
 
-export type DocSearchButtonProps = React.ComponentProps<'button'> & {
+export type DocSearchButtonProps = React.ComponentProps<"button"> & {
   translations?: ButtonTranslations;
 };
 
-const ACTION_KEY_DEFAULT = 'Ctrl' as const;
-const ACTION_KEY_APPLE = '⌘' as const;
+const ACTION_KEY_DEFAULT = "Ctrl" as const;
+const ACTION_KEY_APPLE = "⌘" as const;
 
 function isAppleDevice() {
   return /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
@@ -23,12 +23,12 @@ export const DocSearchButton = React.forwardRef<
   HTMLButtonElement,
   DocSearchButtonProps
 >(({ translations = {}, ...props }, ref) => {
-  const { buttonText = 'Search', buttonAriaLabel = 'Search' } = translations;
+  const { buttonText = "Search", buttonAriaLabel = "Search" } = translations;
 
   const key = useMemo<
     typeof ACTION_KEY_APPLE | typeof ACTION_KEY_DEFAULT | null
   >(() => {
-    if (typeof navigator !== 'undefined') {
+    if (typeof navigator !== "undefined") {
       return isAppleDevice() ? ACTION_KEY_APPLE : ACTION_KEY_DEFAULT;
     }
     return null;

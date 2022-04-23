@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const LvlIcon: React.FC = () => {
   return (
@@ -16,9 +16,9 @@ const LvlIcon: React.FC = () => {
 
 export function SourceIcon(props: { type: string }) {
   switch (props.type) {
-    case 'lvl1':
+    case "lvl1":
       return <LvlIcon />;
-    case 'content':
+    case "content":
       return <ContentIcon />;
     default:
       return <AnchorIcon />;

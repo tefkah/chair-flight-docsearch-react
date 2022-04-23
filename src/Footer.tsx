@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export type FooterTranslations = Partial<{
   selectText: string;
@@ -38,13 +38,13 @@ function CommandIcon(props: CommandIconProps) {
 
 export function Footer({ translations = {} }: FooterProps) {
   const {
-    selectText = 'to select',
-    selectKeyAriaLabel = 'Enter key',
-    navigateText = 'to navigate',
-    navigateUpKeyAriaLabel = 'Arrow up',
-    navigateDownKeyAriaLabel = 'Arrow down',
-    closeText = 'to close',
-    closeKeyAriaLabel = 'Escape key',
+    selectText = "to select",
+    selectKeyAriaLabel = "Enter key",
+    navigateText = "to navigate",
+    navigateUpKeyAriaLabel = "Arrow up",
+    navigateDownKeyAriaLabel = "Arrow down",
+    closeText = "to close",
+    closeKeyAriaLabel = "Escape key",
   } = translations;
 
   return (

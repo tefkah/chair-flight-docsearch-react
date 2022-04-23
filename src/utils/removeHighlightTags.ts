@@ -1,4 +1,4 @@
-import type { DocSearchHit, InternalDocSearchHit } from '../types';
+import type { DocSearchHit, InternalDocSearchHit } from "../types";
 
 const regexHighlightTags = /(<mark>|<\/mark>)/g;
 const regexHasHighlightTags = RegExp(regexHighlightTags.source);
@@ -19,6 +19,6 @@ export function removeHighlightTags(
       : hit._highlightResult?.hierarchy?.lvl0) || {};
 
   return value && regexHasHighlightTags.test(value)
-    ? value.replace(regexHighlightTags, '')
+    ? value.replace(regexHighlightTags, "")
     : value;
 }

@@ -1,10 +1,10 @@
-import type { DocSearchHit, StoredDocSearchHit } from './types';
+import type { DocSearchHit, StoredDocSearchHit } from "./types";
 
 function isLocalStorageSupported() {
-  const key = '__TEST_KEY__';
+  const key = "__TEST_KEY__";
 
   try {
-    localStorage.setItem(key, '');
+    localStorage.setItem(key, "");
     localStorage.removeItem(key);
 
     return true;

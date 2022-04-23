@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { RecentIcon, ResetIcon, StarIcon } from './icons';
-import { Results } from './Results';
-import type { ScreenStateProps } from './ScreenState';
-import type { InternalDocSearchHit } from './types';
+import { RecentIcon, ResetIcon, StarIcon } from "./icons";
+import { Results } from "./Results";
+import type { ScreenStateProps } from "./ScreenState";
+import type { InternalDocSearchHit } from "./types";
 
 export type StartScreenTranslations = Partial<{
   recentSearchesTitle: string;
@@ -16,7 +16,7 @@ export type StartScreenTranslations = Partial<{
 
 type StartScreenProps = Omit<
   ScreenStateProps<InternalDocSearchHit>,
-  'translations'
+  "translations"
 > & {
   hasCollections: boolean;
   translations?: StartScreenTranslations;
@@ -24,14 +24,14 @@ type StartScreenProps = Omit<
 
 export function StartScreen({ translations = {}, ...props }: StartScreenProps) {
   const {
-    recentSearchesTitle = 'Recent',
-    noRecentSearchesText = 'No recent searches',
-    saveRecentSearchButtonTitle = 'Save this search',
-    removeRecentSearchButtonTitle = 'Remove this search from history',
-    favoriteSearchesTitle = 'Favorite',
-    removeFavoriteSearchButtonTitle = 'Remove this search from favorites',
+    recentSearchesTitle = "Recent",
+    noRecentSearchesText = "No recent searches",
+    saveRecentSearchButtonTitle = "Save this search",
+    removeRecentSearchButtonTitle = "Remove this search from history",
+    favoriteSearchesTitle = "Favorite",
+    removeFavoriteSearchButtonTitle = "Remove this search from favorites",
   } = translations;
-  if (props.state.status === 'idle' && props.hasCollections === false) {
+  if (props.state.status === "idle" && props.hasCollections === false) {
     if (props.disableUserPersonalization) {
       return null;
     }

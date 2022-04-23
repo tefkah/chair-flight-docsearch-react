@@ -2,12 +2,12 @@ import type {
   AutocompleteApi,
   AutocompleteState,
   BaseItem,
-} from '@algolia/autocomplete-core';
-import React from 'react';
+} from "@algolia/autocomplete-core";
+import React from "react";
 
-import type { DocSearchProps } from './DocSearch';
-import { Snippet } from './Snippet';
-import type { InternalDocSearchHit, StoredDocSearchHit } from './types';
+import type { DocSearchProps } from "./DocSearch";
+import { Snippet } from "./Snippet";
+import type { InternalDocSearchHit, StoredDocSearchHit } from "./types";
 
 interface ResultsProps<TItem extends BaseItem>
   extends AutocompleteApi<
@@ -17,7 +17,7 @@ interface ResultsProps<TItem extends BaseItem>
     React.KeyboardEvent
   > {
   title: string;
-  collection: AutocompleteState<TItem>['collections'][0];
+  collection: AutocompleteState<TItem>["collections"][0];
   renderIcon: (props: { item: TItem; index: number }) => React.ReactNode;
   renderAction: (props: {
     item: TItem;
@@ -25,7 +25,7 @@ interface ResultsProps<TItem extends BaseItem>
     runFavoriteTransition: (cb: () => void) => void;
   }) => React.ReactNode;
   onItemClick: (item: TItem) => void;
-  hitComponent: DocSearchProps['hitComponent'];
+  hitComponent: DocSearchProps["hitComponent"];
 }
 
 export function Results<TItem extends StoredDocSearchHit>(
@@ -43,7 +43,7 @@ export function Results<TItem extends StoredDocSearchHit>(
         {props.collection.items.map((item, index) => {
           return (
             <Result
-              key={[props.title, item.objectID].join(':')}
+              key={[props.title, item.objectID].join(":")}
               item={item}
               index={index}
               {...props}
@@ -88,14 +88,14 @@ function Result<TItem extends StoredDocSearchHit>({
   return (
     <li
       className={[
-        'DocSearch-Hit',
+        "DocSearch-Hit",
         (item as unknown as InternalDocSearchHit).__docsearch_parent &&
-          'DocSearch-Hit--Child',
-        isDeleting && 'DocSearch-Hit--deleting',
-        isFavoriting && 'DocSearch-Hit--favoriting',
+          "DocSearch-Hit--Child",
+        isDeleting && "DocSearch-Hit--deleting",
+        isFavoriting && "DocSearch-Hit--favoriting",
       ]
         .filter(Boolean)
-        .join(' ')}
+        .join(" ")}
       onTransitionEnd={() => {
         if (action.current) {
           action.current();
@@ -113,7 +113,7 @@ function Result<TItem extends StoredDocSearchHit>({
         <div className="DocSearch-Hit-Container">
           {renderIcon({ item, index })}
 
-          {item.hierarchy[item.type] && item.type === 'lvl1' && (
+          {item.hierarchy[item.type] && item.type === "lvl1" && (
             <div className="DocSearch-Hit-content-wrapper">
               <Snippet
                 className="DocSearch-Hit-title"
@@ -131,11 +131,11 @@ function Result<TItem extends StoredDocSearchHit>({
           )}
 
           {item.hierarchy[item.type] &&
-            (item.type === 'lvl2' ||
-              item.type === 'lvl3' ||
-              item.type === 'lvl4' ||
-              item.type === 'lvl5' ||
-              item.type === 'lvl6') && (
+            (item.type === "lvl2" ||
+              item.type === "lvl3" ||
+              item.type === "lvl4" ||
+              item.type === "lvl5" ||
+              item.type === "lvl6") && (
               <div className="DocSearch-Hit-content-wrapper">
                 <Snippet
                   className="DocSearch-Hit-title"
@@ -150,7 +150,7 @@ function Result<TItem extends StoredDocSearchHit>({
               </div>
             )}
 
-          {item.type === 'content' && (
+          {item.type === "content" && (
             <div className="DocSearch-Hit-content-wrapper">
               <Snippet
                 className="DocSearch-Hit-title"

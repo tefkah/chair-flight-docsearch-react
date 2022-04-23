@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export interface UseDocSearchKeyboardEventsProps {
   isOpen: boolean;
@@ -14,9 +14,9 @@ function isEditingContent(event: KeyboardEvent): boolean {
 
   return (
     element.isContentEditable ||
-    tagName === 'INPUT' ||
-    tagName === 'SELECT' ||
-    tagName === 'TEXTAREA'
+    tagName === "INPUT" ||
+    tagName === "SELECT" ||
+    tagName === "TEXTAREA"
   );
 }
 
@@ -32,23 +32,23 @@ export function useDocSearchKeyboardEvents({
       function open() {
         // We check that no other DocSearch modal is showing before opening
         // another one.
-        if (!document.body.classList.contains('DocSearch--active')) {
+        if (!document.body.classList.contains("DocSearch--active")) {
           onOpen();
         }
       }
       if (
         (event.keyCode === 27 && isOpen) ||
         // The `Cmd+K` shortcut both opens and closes the modal.
-        (event.key === 'k' && (event.metaKey || event.ctrlKey)) ||
+        (event.key === "k" && (event.metaKey || event.ctrlKey)) ||
         // The `/` shortcut opens but doesn't close the modal because it's
         // a character.
-        (!isEditingContent(event) && event.key === '/' && !isOpen)
+        (!isEditingContent(event) && event.key === "/" && !isOpen)
       ) {
         event.preventDefault();
 
         if (isOpen) {
           onClose();
-        } else if (!document.body.classList.contains('DocSearch--active')) {
+        } else if (!document.body.classList.contains("DocSearch--active")) {
           open();
         }
       }
@@ -64,10 +64,10 @@ export function useDocSearchKeyboardEvents({
       }
     }
 
-    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener("keydown", onKeyDown);
     };
   }, [isOpen, onOpen, onClose, onInput, searchButtonRef]);
 }
