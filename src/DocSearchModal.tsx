@@ -13,12 +13,13 @@ import type { SearchBoxTranslations } from './SearchBox';
 import { SearchBox } from './SearchBox';
 import { createStoredSearches } from './stored-searches';
 import type {
+  DocSearchHit,
   InternalDocSearchHit,
   StoredDocSearchHit,
 } from './types';
 import { useTouchEvents } from './useTouchEvents';
 import { useTrapFocus } from './useTrapFocus';
-import { identity, noop } from './utils';
+import { groupBy, identity, noop, removeHighlightTags } from './utils';
 
 export type ModalTranslations = Partial<{
   searchBox: SearchBoxTranslations;
@@ -33,10 +34,8 @@ export type DocSearchModalProps = DocSearchProps & {
 };
 
 export function DocSearchModal({
-
   indexName,
   placeholder = 'Search docs',
-  searchParameters,
   onClose = noop,
   transformItems = identity,
   hitComponent = Hit,
@@ -140,7 +139,7 @@ export function DocSearchModal({
         onStateChange(props) {
           setState(props.state);
         },
-        getSources: async ({ query }) => {
+        getSources: async ({ query, state: sourcesState, setContext }) => {
           if (!query) {
             if (disableUserPersonalization) {
               return [];
@@ -181,11 +180,22 @@ export function DocSearchModal({
               },
             ];
           }
-
           const results = await search(query);
-          
-          return results.map(
-            (_, index) => {
+          const sources = groupBy(results, removeHighlightTags);
+
+          // We store the `lvl0`s to display them as search suggestions
+          // in the "no results" screen.
+          if (
+            (sourcesState.context.searchSuggestions as any[]).length <
+            Object.keys(sources).length
+          ) {
+            setContext({
+              searchSuggestions: Object.keys(sources),
+            });
+          }
+
+          return Object.values<DocSearchHit[]>(sources).map(
+            (items, index) => {
               return {
                 sourceId: `hits${index}`,
                 onSelect({ item, event }) {
@@ -199,7 +209,26 @@ export function DocSearchModal({
                   return item.url;
                 },
                 getItems() {
-                  return transformItems(results)
+                  return Object.values(
+                    groupBy(items, (item) => item.hierarchy.lvl1)
+                  )
+                    .map(transformItems)
+                    .map((groupedHits) =>
+                      groupedHits.map((item) => {
+                        return {
+                          ...item,
+                          __docsearch_parent:
+                            item.type !== 'lvl1' &&
+                            groupedHits.find(
+                              (siblingItem) =>
+                                siblingItem.type === 'lvl1' &&
+                                siblingItem.hierarchy.lvl1 ===
+                                  item.hierarchy.lvl1
+                            ),
+                        };
+                      })
+                    )
+                    .flat();
                 },
               };
             }
@@ -208,7 +237,6 @@ export function DocSearchModal({
       }),
     [
       indexName,
-      searchParameters,
       onClose,
       recentSearches,
       favoriteSearches,
