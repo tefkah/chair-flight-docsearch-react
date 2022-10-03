@@ -1,10 +1,10 @@
 {
-  "name": "chair-flight-docsearch-react",
-  "description": "A clone of Algolia's React DocSearch, but it accepts any search backend.",
+  "name": "@tefkah/chair-flight-docsearch-react",
+  "description": "A clone of a clone of Algolia's React DocSearch, but it accepts any search backend and is incompatible with IE.",
   "version": "3.0.4",
   "license": "MIT",
-  "repository": "chair-flight/chair-flight-docsearch-react",
-  "author": "pupoSDC",
+  "repository": "tefkah/chair-flight-docsearch-react",
+  "author": "tefkah",
   "sideEffects": false,
   "files": [
     "dist/",

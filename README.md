@@ -1,31 +1,33 @@
 # chair-flight Docsearch React
 
-A clone of Algolia's React [DocSearch](http://docsearch.algolia.com/), but it accepts any 
-search backend.
+A clone of Algolia's React [DocSearch](http://docsearch.algolia.com/), but it accepts any
+search backend, _AND IS INCOMPATIBLE WITH IE_, in order not to have to polyfill `regeneratorRuntime`.
 
 ## Installation
 
 ```bash
-yarn add chair-flight-docsearch-react
+yarn add @tefkah/chair-flight-docsearch-react
 # or
-npm install chair-flight-docsearch-react
+npm install @tefkah/chair-flight-docsearch-react
 ```
 
 ## Get started
 
 The api for the component is pretty much the same as the original `docsearch-react`
-except that instead of providing an `appId` and `apiKey` you are supposed to pass 
+except that instead of providing an `appId` and `apiKey` you are supposed to pass
 an arbitrary search function:
 
 ```tsx
-import { DocSearch } from '@docsearch/react';
+import { DocSearch } from '@tefkah/chair-flight-docsearch-react';
 
 import '@docsearch/css';
 
 function App() {
   return (
     <DocSearch
-      search={async (queryString) => myCustomBackend.search(queryString).map(toDocSearchHit)}
+      search={async (queryString) =>
+        myCustomBackend.search(queryString).map(toDocSearchHit)
+      }
       indexName="YOUR_INDEX_NAME_USED_FOR_LOCAL_CACHE_PURPOSES"
     />
   );
@@ -34,8 +36,8 @@ function App() {
 export default App;
 ```
 
-The search function is expected to return an array of `DocSearchHit`, the internal type 
-used by algolia documents. You will most likely have to write a function mapping your 
+The search function is expected to return an array of `DocSearchHit`, the internal type
+used by algolia documents. You will most likely have to write a function mapping your
 search results into this specific format:
 
 ```ts

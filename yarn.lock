@@ -2,58 +2,17 @@
 # yarn lockfile v1
 
 
-"@algolia/autocomplete-core@1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-core/-/autocomplete-core-1.5.2.tgz#ec0178e07b44fd74a057728ac157291b26cecf37"
-  integrity sha512-DY0bhyczFSS1b/CqJlTE/nQRtnTAHl6IemIkBy0nEWnhDzRDdtdx4p5Uuk3vwAFxwEEgi1WqKwgSSMx6DpNL4A==
+"@algolia/autocomplete-core@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-core/-/autocomplete-core-1.6.2.tgz#54324a558efc2438559bb3e79fd2f2ae4acef0dd"
+  integrity sha512-YntEdEOck6f7LtCcrT2TjUl2AI+G/HcY7gQWMgM4kuruu9vSxyF05W48IFWANt2gTI7oj0Q5zAZgyVppkQM9LA==
   dependencies:
-    "@algolia/autocomplete-shared" "1.5.2"
+    "@algolia/autocomplete-shared" "1.6.2"
 
-"@algolia/autocomplete-shared@1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-shared/-/autocomplete-shared-1.5.2.tgz#e157f9ad624ab8fd940ff28bd2094cdf199cdd79"
-  integrity sha512-ylQAYv5H0YKMfHgVWX0j0NmL8XBcAeeeVQUmppnnMtzDbDnca6CzhKj3Q8eF9cHCgcdTDdb5K+3aKyGWA0obug==
-
-"@algolia/cache-common@4.13.0":
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/@algolia/cache-common/-/cache-common-4.13.0.tgz#27b83fd3939d08d72261b36a07eeafc4cb4d2113"
-  integrity sha512-f9mdZjskCui/dA/fA/5a+6hZ7xnHaaZI5tM/Rw9X8rRB39SUlF/+o3P47onZ33n/AwkpSbi5QOyhs16wHd55kA==
-
-"@algolia/client-common@4.13.0":
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/@algolia/client-common/-/client-common-4.13.0.tgz#8bc373d164dbdcce38b4586912bbe162492bcb86"
-  integrity sha512-GoXfTp0kVcbgfSXOjfrxx+slSipMqGO9WnNWgeMmru5Ra09MDjrcdunsiiuzF0wua6INbIpBQFTC2Mi5lUNqGA==
-  dependencies:
-    "@algolia/requester-common" "4.13.0"
-    "@algolia/transporter" "4.13.0"
-
-"@algolia/client-search@^4.13.0":
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-4.13.0.tgz#2d8ff8e755c4a37ec89968f3f9b358eed005c7f0"
-  integrity sha512-blgCKYbZh1NgJWzeGf+caKE32mo3j54NprOf0LZVCubQb3Kx37tk1Hc8SDs9bCAE8hUvf3cazMPIg7wscSxspA==
-  dependencies:
-    "@algolia/client-common" "4.13.0"
-    "@algolia/requester-common" "4.13.0"
-    "@algolia/transporter" "4.13.0"
-
-"@algolia/logger-common@4.13.0":
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/@algolia/logger-common/-/logger-common-4.13.0.tgz#be2606e71aae618a1ff1ea9a1b5f5a74284b35a8"
-  integrity sha512-8yqXk7rMtmQJ9wZiHOt/6d4/JDEg5VCk83gJ39I+X/pwUPzIsbKy9QiK4uJ3aJELKyoIiDT1hpYVt+5ia+94IA==
-
-"@algolia/requester-common@4.13.0":
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/@algolia/requester-common/-/requester-common-4.13.0.tgz#47fb3464cfb26b55ba43676d13f295d812830596"
-  integrity sha512-BRTDj53ecK+gn7ugukDWOOcBRul59C4NblCHqj4Zm5msd5UnHFjd/sGX+RLOEoFMhetILAnmg6wMrRrQVac9vw==
-
-"@algolia/transporter@4.13.0":
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/@algolia/transporter/-/transporter-4.13.0.tgz#f6379e5329efa2127da68c914d1141f5f21dbd07"
-  integrity sha512-8tSQYE+ykQENAdeZdofvtkOr5uJ9VcQSWgRhQ9h01AehtBIPAczk/b2CLrMsw5yQZziLs5cZ3pJ3478yI+urhA==
-  dependencies:
-    "@algolia/cache-common" "4.13.0"
-    "@algolia/logger-common" "4.13.0"
-    "@algolia/requester-common" "4.13.0"
+"@algolia/autocomplete-shared@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-shared/-/autocomplete-shared-1.6.2.tgz#27ad6d8fa7825c6146933e11eebc5936ca12f569"
+  integrity sha512-Js7N8EgKsRgaclDde70rF07VOdC+Zb6VLXTIWkJnO6+EI9zbXm/mT2StGVcpNuQ+UN8ZF/bVZLjuVBypOk8bUQ==
 
 "@ampproject/remapping@^2.1.0":
   version "2.1.2"
